@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Django Ninja Gold</title>
+    <style>
+        div{
+            margin: auto;
+            width: 150px;
+            height: 150px;
+            background-color: aquamarine;
+            border: 2px solid black;
+            display: inline-block;
+        }
+        div input{
+            position: relative;
+            margin-left: 40px;
+            margin-top: 60px;
+        }
+        .location{
+            text-align: center;
+            margin-top: 15px;
+        }
+        .bottom{
+            padding: 10px;
+            overflow:scroll;
+            height: 200px;
+            background-color: black;
+            border-radius: 5px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Gold = {{request.session.total}} </h2>
+    <div>
+        <form action="/process" method="POST">
+            {%csrf_token%}
+            <h3 class="location" >Farm</h3>
+            <input type="hidden" name="building" value="farm" />
+            <input type="submit" value="Find Gold!"/>
+        </form>
+    </div>
+    <div>
+        <form action="/process" method="POST">
+            {%csrf_token%}
+            <h3 class="location" >Cave</h3>
+            <input type="hidden" name="building" value="cave" />
+            <input type="submit" value="Find Gold!"/>
+        </form>
+    </div>
+    <div>
+        <form action="/process" method="POST">
+            {%csrf_token%}
+            <h3 class="location" >House</h3>
+            <input type="hidden" name="building" value="house" />
+            <input type="submit" value="Find Gold!"/>
+        </form>
+    </div>
+    <div>
+        <form action="/process" method="POST">
+            {%csrf_token%}
+            <h3 class="location" >Casino</h3>
+            <input type="hidden" name="building" value="casino" />
+            <input type="submit" value="Find Gold!"/>
+        </form>
+    </div>
+    <form action="/reset" method="POST">
+        {%csrf_token%}
+    <button name="reset" >Reset</button>
+    </form>
+</div>
+<h3>Activites:</h3>
+<div class="bottom">
+    {% for message in request.session.message reversed %}
+        <p class="{{message.lose}}">{{message.message}}</p>
+    {% endfor %}
+</div>
+</div>
+   </body> 
+</html>
